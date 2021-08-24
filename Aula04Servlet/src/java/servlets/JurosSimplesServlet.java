@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Dell Inspiron 153000
  */
-@WebServlet(name = "MathServlet", urlPatterns = {"/calculos.html"})
-public class MathServlet extends HttpServlet {
+@WebServlet(name = "JurosSimplesServlet", urlPatterns = {"/juros-simples.html"})
+public class JurosSimplesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,43 +37,35 @@ public class MathServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Calculos matemáticos</title>");
+            out.println("<title>Juros Simples</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("Digite 1 para soma");
-            out.println("<br/>");
-            out.println("Digite 2 para subtração");
-            out.println("<br/>");
-            out.println("Digite 3 para multiplicação");
-            out.println("<br/>");
-            out.println("Digite 4 para divisão");
-            out.println("<hr/>");
-
-            double operacao = Double.parseDouble(request.getParameter("operacao"));
-            out.println("<h4><b>operacao</b>: " + operacao + "</h4>");
-            double n1 = Double.parseDouble(request.getParameter("n1"));
-            out.println("<h4><b>N1</b>: " + n1 + "</h4>");
-            double n2 = Double.parseDouble(request.getParameter("n2"));
-            out.println("<h4><b>N2</b>: " + n2 + "</h4>");
-            out.println("<hr/>");
             
-            if(operacao == 1){
-                out.println(n1 + n2);
-            }else if (operacao == 2){
-                out.println(n1 - n2);
-            }else if (operacao == 3){
-                out.println(n1 * n2);
-            }else if(operacao == 4){
-                out.println(n1 / n2);
-            }else{
-                out.println("Digite uma opção válida!");
-            }
+            double vp1 = Double.parseDouble(request.getParameter("vp1"));
+            out.println("<h4><b>Valor presente</b>: " + vp1 + "</h4>");
+            
+            double j1 = Double.parseDouble(request.getParameter("j1"));
+            out.println("<h4><b>Taxa de juros</b>: " + j1 + " %</h4>");
+            
+            int p1 = Integer.parseInt(request.getParameter("p1"));
+            out.println("<h4><b>Período</b>: " + p1 + " meses</h4>");
+            
+            out.println("</br>");
+            
+            double vf1;
+            vf1 = vp1*(1+j1*p1);
+            
+            out.println("O valor final da aplicação é: " + vf1);
+            
+            out.println("<hr/>");
             
             out.println("<h3><a href='index.html'>Voltar</a></h3>");
+
             out.println("</body>");
             out.println("</html>");
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
