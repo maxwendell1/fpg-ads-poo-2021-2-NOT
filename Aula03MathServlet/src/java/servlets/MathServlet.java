@@ -40,33 +40,33 @@ public class MathServlet extends HttpServlet {
             out.println("<title>Calculos matemáticos</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("Digite 1 para soma");
-            out.println("<br/>");
-            out.println("Digite 2 para subtração");
-            out.println("<br/>");
-            out.println("Digite 3 para multiplicação");
-            out.println("<br/>");
-            out.println("Digite 4 para divisão");
+            
             out.println("<hr/>");
-
-            double operacao = Double.parseDouble(request.getParameter("operacao"));
-            out.println("<h4><b>operacao</b>: " + operacao + "</h4>");
+            
             double n1 = Double.parseDouble(request.getParameter("n1"));
             out.println("<h4><b>N1</b>: " + n1 + "</h4>");
             double n2 = Double.parseDouble(request.getParameter("n2"));
             out.println("<h4><b>N2</b>: " + n2 + "</h4>");
             out.println("<hr/>");
+            int operacao = Integer.parseInt(request.getParameter("operacao"));
+            out.println("<h4><b>Operação</b>: " + operacao + "</h4>");
             
-            if(operacao == 1){
-                out.println(n1 + n2);
-            }else if (operacao == 2){
-                out.println(n1 - n2);
-            }else if (operacao == 3){
-                out.println(n1 * n2);
-            }else if(operacao == 4){
-                out.println(n1 / n2);
-            }else{
-                out.println("Digite uma opção válida!");
+            switch (operacao) {
+                case 1:
+                    out.println(n1 + n2);
+                    break;
+                case 2:
+                    out.println(n1 - n2);
+                    break;
+                case 3:
+                    out.println(n1 * n2);
+                    break;
+                case 4:
+                    out.println(n1 / n2);
+                    break;
+                default:
+                    out.println("Digite uma opção válida!");
+                    break;
             }
             
             out.println("<h3><a href='index.html'>Voltar</a></h3>");
