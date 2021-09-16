@@ -1,0 +1,8 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<hr/>
+<div style="text-align: center">
+    <small><u>FATEC PRAIA GRANDE</u></small>
+    <br>
+    <small><u>Praça 19 de Janeiro, 144 - Boqueirão, Praia Grande - SP, 11700-100</u></small>
+</div>
