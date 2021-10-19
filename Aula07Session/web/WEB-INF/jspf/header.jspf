@@ -1,26 +1,27 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
 <%
-    if(request.getParameter("session-login")!=null){
-        session.setAttribute("session-name", request.getParameter("session-name"));
+    if(request.getParameter("auth-login")!=null){
+        String userName = request.getParameter("auth-username");
+        session.setAttribute("auth-username", userName);
         response.sendRedirect(request.getRequestURI());
-    }else if(request.getParameter("session-logout")!=null){
-        session.removeAttribute("session-name");
+    }else if(request.getParameter("auth-logout")!=null){
+        session.removeAttribute("auth-username");
         response.sendRedirect(request.getRequestURI());
     }
-    String sessionName = (String) session.getAttribute("session-name");
+    String authName = (String) session.getAttribute("auth-username");
 %>
 <h1>SessionApp</h1>
 <form method="post">
     <a href="index.jsp">ÍNDICE</a> |
     <a href="page1.jsp">PÁGINA 1</a> |
     <a href="page2.jsp">PÁGINA 2</a> |
-    <%if(sessionName==null){%>
-    <input type="text" name="session-name" placeholder="Entre com seu nome"/>
-        <input type="submit" name="session-login" value="Entrar"/>
+    <%if(authUserName == null){%>
+        <input type="text" name="auth-username"/>
+        <input type="submit" name="auth-login" value="LOGIN"/>
     <%}else{%>
-        Bem vindo, <%= sessionName %>
-        <input type="submit" name="session-logout" value="Sair"/>
+        Bem vindo, <%= authUserName %>
+        <input type="submit" name="auth-logout" value="LOGOUT"/>
     <%}%>
 </form>
 <hr/>

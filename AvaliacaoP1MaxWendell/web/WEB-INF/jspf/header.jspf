@@ -1,0 +1,57 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.ArrayList"%>
+<%@ page pageEncoding="UTF-8" %>
+<%
+    ArrayList<Integer> authNumbers = (ArrayList) application.getAttribute("auth-numbers");
+    ArrayList<String> sessionList = (ArrayList) application.getAttribute("sessionList");
+    if(request.getParameter("auth-login")!= null){
+        String userName = request.getParameter("auth-username");
+        session.setAttribute("auth-username", userName);
+        authNumbers = new ArrayList<>();
+        while(authNumbers.size() < 6){
+            int n =((int)(Math.random()*59))+1;
+            if(!authNumbers.contains(n)){
+            authNumbers.add(n);
+            }
+    }
+    session.setAttribute("auth-numbers", authNumbers);
+    
+        if(sessionList == null){
+            sessionList = new ArrayList();
+            sessionList.add(userName);
+        }else{
+            sessionList.add(userName);
+        }
+        application.setAttribute("sessionList", sessionList);
+        response.sendRedirect(request.getRequestURI());
+    }else if(request.getParameter("auth-logout")!=null){
+        if(sessionList != null){
+            sessionList.remove(session.getAttribute("auth-username"));
+            application.setAttribute("sessionList", sessionList);    
+        }
+        session.removeAttribute("auth-username");
+        session.removeAttribute("auth-numbers");
+        response.sendRedirect(request.getRequestURI());
+    }
+    String authUserName = (String) session.getAttribute("auth-username");
+    
+    int sessions = 0;
+    if(sessionList != null){
+        sessions = sessionList.size();
+    }
+%>
+
+<h1>MaxWendellApp</h1>
+<form method="post">
+    <a href="index.jsp">ÍNDICE</a> |
+    <a href="max.jsp">MINHA PÁGINA</a> |
+    <a href="max-dica-megasena.jsp">DICA PARA MEGASENA</a> |
+    <%if(authUserName == null){%>
+        <input type="text" name="auth-username"/>
+        <input type="submit" name="auth-login" value="LOGIN"/>
+    <%}else{%>
+        Bem vindo, <%= authUserName %>
+        <input type="submit" name="auth-logout" value="LOGOUT"/>
+    <%}%>
+</form>
+<hr/>
